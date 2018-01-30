@@ -32,8 +32,9 @@ public class MatematicaComputacional {
             System.out.println("5 - Método Simplex.");
             System.out.print("Digite: ");
             int in = reader.nextInt();
-
-            double[][] M = criaMatriz();
+            
+            int n;
+            double[][] M;
 
             switch (in) {
                 case 0:
@@ -42,16 +43,45 @@ public class MatematicaComputacional {
                     break;
 
                 case 1:
+                    System.out.println("Digite o tamanho da matriz: (0 para voltar)");
+                    n = reader.nextInt();
+                    
+                    if(n == 0)
+                    {
+                        break;
+                    }
+                    M = criaMatriz(n);
+                    
                     DecomposicaoLU lu = new DecomposicaoLU();
                     lu.luDecomposition(M);
                     break;
 
                 case 2:
+                    System.out.println("Digite o tamanho da matriz: (0 para voltar)");
+                    n = reader.nextInt();
+                    
+                    if(n == 0)
+                    {
+                        break;
+                    }
+                    
+                    M = criaMatriz(n);
+                    
                     Gauss gauss = new Gauss();
                     gauss.solve(M);
                     break;
 
                 case 3:
+                    System.out.println("Digite o tamanho da matriz: (0 para voltar)");
+                    n = reader.nextInt();
+                    
+                    if(n == 0)
+                    {
+                        break;
+                    }
+                    
+                    M = criaMatriz(n);
+                    
                     Jacobi jacobi = new Jacobi(M);
 
                     if (!jacobi.tornaDominante()) {
@@ -62,6 +92,16 @@ public class MatematicaComputacional {
                     break;
 
                 case 4:
+                    System.out.println("Digite o tamanho da matriz: (0 para voltar)");
+                    n = reader.nextInt();
+                    
+                    if(n == 0)
+                    {
+                        break;
+                    }
+                    
+                    M = criaMatriz(n);
+                    
                     Seidel seidel = new Seidel(M);
 
                     if (!seidel.tornaDominante()) {
@@ -74,7 +114,7 @@ public class MatematicaComputacional {
                     break;
 
                 case 5:
-                    System.out.println("Em contrução");
+                    System.out.println("Em contrução...");
                     break;
 
                 default:
@@ -85,15 +125,23 @@ public class MatematicaComputacional {
 
     }
 
-    public static double[][] criaMatriz() throws IOException {
+    public static double[][] criaMatriz(int n) throws IOException {
 
-        int n;
         double[][] M;
-
+        
+        System.out.println("Digite as linhas da matriz");
+        System.out.println("Exemplo de uso:");
+        System.out.println("5 -2  3 -1\n-3  9  1  2\n2 -1 -7  3");
         BufferedReader tokenReader = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter writer = new PrintWriter(System.out, true);
-
+        
         n = Integer.parseInt(tokenReader.readLine());
+        
+        if(n == 0)
+        {
+            
+        }
+                
         M = new double[n][n + 1];
 
         for (int i = 0; i < n; i++) {
